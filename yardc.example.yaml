@@ -1,0 +1,28 @@
+hosts:
+    - uri: qemu:///system
+      name: local
+    
+profiles:
+    foo:
+        username: foo
+        password: bar
+    foo2:
+        username: foo
+        encrypted_password: {password encrypted by GPG in one line ASCII armored format}
+        shares:
+              - name: share
+                path: /mnt/share
+
+machine_profiles:
+    - host: local
+      machine: toto
+      profile: foo
+    - host: local
+      machine: titi-*
+      profile: foo2
+
+rdp:
+    width: 1920
+    height: 1080
+
+gpg: {User GPG fingerprint}
